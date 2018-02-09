@@ -1,0 +1,83 @@
+﻿@using WeatherApp.ViewModels
+@model WeatherApp.ViewModels.WeatherResultViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid" style="max-width: 30rem">
+    <form asp-controller="Home" asp-action="Search" method="get" class="input-group input-group-sm mb-3">
+        <input type="text" class="form-control" name="q" id="location" placeholder="Search location">
+        <div class="input-group-append">
+            <input class="btn btn-outline-secondary" value="Search" type="submit" />
+        </div>
+    </form>
+
+    @if (Model != null)
+    {
+        <div class="card weather-card">
+            <div class="p-3 mb-2 bg-primary text-white">
+                <div class="col text-center">
+                    <h4 class="card-title">@Model.Location</h4>
+                    <h2>@Model.Temperature.Current<sup>&deg;</sup>C</h2>
+                    <img src="@Model.Temperature.Icon" />
+                    <span>@Model.Temperature.Main</span>
+                </div>
+                <div style="float: right">
+                    <div class="row">
+                        <div class="col">
+                            <img src="images/sunrise.png" width="40" />
+                        </div>
+                        <div class="col">
+                            <img src="images/sunset.png" width="40" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            @Model.Sunrise.ToString("h tt")
+                        </div>
+                        <div class="col">
+                            @Model.Sunset.ToString("h tt")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row justify-content-md-center">
+                    <div class="col">
+                        Max
+                    </div>
+                    <div class="col">
+                        Min
+                    </div>
+                    <div class="col">
+                        Pressure
+                    </div>
+                    <div class="col">
+                        Humidity
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="col">
+                        @Model.Temperature.Max<sup>&deg;</sup>C
+                    </div>
+                    <div class="col">
+                        @Model.Temperature.Min<sup>&deg;</sup>C
+                    </div>
+                    <div class="col">
+                        @Model.Pressure hPa
+                    </div>
+                    <div class="col">
+                        @Model.Humidity%
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <span class="text-danger">@ViewData.ModelState["invalid_location"].Errors[0].ErrorMessage</span>
+    }
+
+</div>
+
