@@ -26,7 +26,6 @@ namespace WeatherApp.Services
 		{
 			var baseUri = _configuration[AppConstants.OpenWeatherMapBaseUri];
 			var apiKey = _configuration[AppConstants.OpenWeatherMapApiKey];
-
 			var queryParameters = new Dictionary<string, string>
 			{
 				{ "q", location },
@@ -34,13 +33,10 @@ namespace WeatherApp.Services
 				{ "units" , "metric" }
 			};
 
-			var requestUri = _httpClientFacade.GetRequest(baseUri, queryParameters);
-
+			var requestUri = _httpClientFacade.GetRequestWithQueryParameters(baseUri, queryParameters);
 			var response = await _httpClientFacade.GetAsync(requestUri);
 			if (!response.IsSuccessStatusCode)
-			{
 				return null;
-			}
 
 			var content = await response.Content.ReadAsStringAsync();
 			return JsonConvert.DeserializeObject<OpenWeatherApiModel>(content);

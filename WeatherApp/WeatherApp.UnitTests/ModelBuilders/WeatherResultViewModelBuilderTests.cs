@@ -24,6 +24,16 @@ namespace WeatherApp.UnitTests.ModelBuilders
 	    }
 
 		[Fact]
+	    public async Task Buil_ReturnsNull_WhenEmptyLocation()
+	    {  
+		    // Arrange
+		    var result = await _weatherViewModelBuilder.Build(string.Empty);
+
+		    // Assert
+		    Assert.Null(result);
+		}
+
+		[Fact]
 	    public async Task Build_Returns_Null_When_Invalid_Location()
 	    {
 			// Act

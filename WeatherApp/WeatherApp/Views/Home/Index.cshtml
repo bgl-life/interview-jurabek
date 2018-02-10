@@ -1,5 +1,5 @@
-﻿@using WeatherApp.ViewModels
-@model WeatherApp.ViewModels.WeatherResultViewModel
+﻿@using WeatherApp.Constants
+@model WeatherResultViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -8,11 +8,11 @@
     <form asp-controller="Home" asp-action="Search" method="get" class="input-group input-group-sm mb-3">
         <input type="text" class="form-control" name="q" id="location" placeholder="Search location">
         <div class="input-group-append">
-            <input class="btn btn-outline-secondary" value="Search" type="submit" />
+            <input class="btn btn-outline-secondary" value="Search" type="submit" required/>
         </div>
     </form>
 
-    @if (Model != null)
+    @if (Model != null && ViewData.ModelState.IsValid)
     {
         <div class="card weather-card">
             <div class="p-3 mb-2 bg-primary text-white">
@@ -20,7 +20,7 @@
                     <h4 class="card-title">@Model.Location</h4>
                     <h2>@Model.Temperature.Current<sup>&deg;</sup>C</h2>
                     <img src="@Model.Temperature.Icon" />
-                    <span>@Model.Temperature.Main</span>
+                    <span>@Model.Temperature.Description</span>
                 </div>
                 <div style="float: right">
                     <div class="row">
@@ -76,7 +76,7 @@
 
     @if (!ViewData.ModelState.IsValid)
     {
-        <span class="text-danger">@ViewData.ModelState["invalid_location"].Errors[0].ErrorMessage</span>
+        <span class="text-danger">@ViewData.ModelState[AppConstants.InvalidLocationKey].Errors[0].ErrorMessage</span>
     }
 
 </div>

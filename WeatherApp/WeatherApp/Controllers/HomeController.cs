@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WeatherApp.Abstraction.ModelBuilders;
+using WeatherApp.Constants;
 
 namespace WeatherApp.Controllers
 {
@@ -17,15 +18,13 @@ namespace WeatherApp.Controllers
 		{
 			return View();
 		}
-
-		[HttpGet("search")]
+		
 		public async Task<IActionResult> Search([FromQuery(Name = "q")]string location)
 		{
 			var model = await _weatherResultViewModelBuilder.Build(location);
 			if (model == null)
 			{
-				ModelState.AddModelError("invalid_location", "You are entered invalid location!");
-				return View(nameof(Index));
+				ModelState.AddModelError(AppConstants.InvalidLocationKey, "You are entered invalid location!");
 			}
 			return View(nameof(Index), model);
 		}

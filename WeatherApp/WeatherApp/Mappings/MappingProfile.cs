@@ -19,7 +19,7 @@ namespace WeatherApp.Mappings
 			    .ForMember(x => x.Temperature, 
 				    map => map.MapFrom(x => new TemperatureViewModel
 					{
-						Main = x.Weather.FirstOrDefault().Main,
+						Description = x.Weather.FirstOrDefault().Main,
 						Current = x.Main.Temp,
 						Max = x.Main.TempMax,
 						Min = x.Main.TempMin,

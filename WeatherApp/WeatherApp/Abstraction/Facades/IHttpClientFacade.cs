@@ -8,6 +8,6 @@ namespace WeatherApp.Abstraction.Facades
     {
 		Task<HttpResponseMessage> GetAsync(string requestUri);
 
-	    string GetRequest(string baseUri, IDictionary<string, string> queryParameters);
+	    string GetRequestWithQueryParameters(string baseUri, IDictionary<string, string> queryParameters);
     }
 }

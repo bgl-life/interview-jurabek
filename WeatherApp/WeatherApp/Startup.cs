@@ -35,7 +35,6 @@ namespace WeatherApp
             }
 
             app.UseStaticFiles();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

@@ -36,7 +36,7 @@ namespace WeatherApp.UnitTests.Services
 
 			_configurationMock.SetupGet(x => x[AppConstants.OpenWeatherMapBaseUri]).Returns(baseUri);
 			_configurationMock.SetupGet(x => x[AppConstants.OpenWeatherMapApiKey]).Returns(apiKey);
-			_httpClientFacadeMock.Setup(x => x.GetRequest(baseUri, It.IsAny<IDictionary<string, string>>())).Returns(requestUri);
+			_httpClientFacadeMock.Setup(x => x.GetRequestWithQueryParameters(baseUri, It.IsAny<IDictionary<string, string>>())).Returns(requestUri);
 			_httpClientFacadeMock.Setup(x => x.GetAsync(requestUri)).Returns(Task.FromResult(response));
 
 			// Arrange
@@ -59,7 +59,7 @@ namespace WeatherApp.UnitTests.Services
 
 		    _configurationMock.SetupGet(x => x[AppConstants.OpenWeatherMapBaseUri]).Returns(baseUri);
 		    _configurationMock.SetupGet(x => x[AppConstants.OpenWeatherMapApiKey]).Returns(apiKey);
-		    _httpClientFacadeMock.Setup(x => x.GetRequest(baseUri, It.IsAny<IDictionary<string, string>>())).Returns(requestUri);
+		    _httpClientFacadeMock.Setup(x => x.GetRequestWithQueryParameters(baseUri, It.IsAny<IDictionary<string, string>>())).Returns(requestUri);
 		    _httpClientFacadeMock.Setup(x => x.GetAsync(requestUri)).Returns(Task.FromResult(response));
 
 		    // Arrange

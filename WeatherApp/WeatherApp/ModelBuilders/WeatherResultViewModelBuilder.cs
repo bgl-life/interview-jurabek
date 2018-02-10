@@ -21,11 +21,12 @@ namespace WeatherApp.ModelBuilders
 
 	    public async Task<WeatherResultViewModel> Build(string location)
 	    {
+		    if (string.IsNullOrEmpty(location))
+			    return null;
+
 		    var weatherResult = await _openWeatherMapService.GetWeatherByLocation(location);
 		    if (weatherResult == null)
-		    {
 			    return null;
-		    }
 
 			return _mapper.Map<WeatherResultViewModel>(weatherResult);
 		}

@@ -15,18 +15,13 @@ namespace WeatherApp.Facades
 	    {
 		    _client = new HttpClient();
 	    }
-
-		public HttpClientFacade(HttpClient client)
-	    {
-		    _client = client;
-	    }
 		
 	    public Task<HttpResponseMessage> GetAsync(string requestUri)
 	    {
 		    return _client.GetAsync(requestUri);
 	    }
 
-	    public string GetRequest(string baseUri, IDictionary<string, string> queryParameters)
+	    public string GetRequestWithQueryParameters(string baseUri, IDictionary<string, string> queryParameters)
 	    {
 			return QueryHelpers.AddQueryString(baseUri, queryParameters);
 		}
